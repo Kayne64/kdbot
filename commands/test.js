@@ -5,6 +5,10 @@ module.exports = {
     .setName('test')
     .setDescription('Tests Functionality'),
     async execute(interaction) {
-        await interaction.reply({content: `Test's Functionality of Bot`, ephemeral: true})
+        const { MessageEmbed } = require('discord.js')
+        const embed = new MessageEmbed()
+        .setTitle('KD | Testing')
+        .setDescription('Bot is functioning well, No Errors!')
+        interaction.reply({content: '_ _', embeds: [embed], ephemeral: true})
     }
 };
