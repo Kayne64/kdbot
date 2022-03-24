@@ -5,6 +5,7 @@ module.exports = {
     .setName('test')
     .setDescription('Tests Functionality'),
     async execute(interaction) {
+        const channel = interaction.channel
         const { MessageEmbed } = require('discord.js')
         const embed = new MessageEmbed()
         .setTitle('KD | Testing')
