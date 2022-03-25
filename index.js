@@ -1,6 +1,6 @@
 // Require Classes
 const fs = require('fs')
-const { Client, Intents, Collection } = require('discord.js');
+const { Client, Intents, Collection, MessageEmbed } = require('discord.js');
 const config = require('./config.json')
 
 // New Client & Intents
@@ -49,6 +49,65 @@ for (const file of eventFiles) {
         client.on(event.name, (...args) => event.execute(...args));
     }
 }
+
+// Embed to User when Joined
+client.on('guildMemberAdd', async (member, message) => {
+
+        if (member.guild.id) {
+            const welcomechannel = member.guild.channels.cache.get('941149392637939752')
+
+            const welcomeembed = new MessageEmbed()
+            .setTitle('KD | Runway')
+            .setThumbnail(member.user.displayAvatarURL())
+            .setDescription(`
+            **User Information:**
+            **Username:** ${member.user.tag}
+            **User ID:** ${member.user.id}
+            **User Discriminator:** ${member.user.discriminator}**
+            **User Age: ** ${member.user.createdAt} 
+            **User Joined At:** ${member.guild.joinedAt}
+
+            **Server Information**
+            **Member Count:** ${member.guild.memberCount}
+            **Server ID:** ${member.guild.id}
+
+            **Channels**
+            **Terms & Conditions: ** <#927575864869261362>
+            **FAQ: ** <#927575844929564762>
+            **About Us: ** <#927575836402548756>
+            **Announcements: <#927576095342096435>
+            `)
+            
+            .setFooter(`Welcome to Kayne's Development ${member.user.tag}`)
+            .setTimestamp()
+            welcomechannel.send({content: '_ _', embeds: [welcomeembed]})
+        }
+})
+
+// Embed to Log when User Joined
+client.on('guildMemberAdd', async (member) => {
+
+    if (member.guild.id) {
+        const logchannel = member.guild.channels.cache.get('927915306431692920')
+
+        const logembed = new MessageEmbed()
+        .setTitle('KD | User Joined')
+        .setThumbnail(member.user.displayAvatarURL())
+        .setDescription(`
+        **User Information:**
+        **Username:** ${member.user.tag}
+        **User ID:** ${member.user.id}
+        **User Discriminator:** ${member.user.discriminator}**
+        **User Age: ** ${member.user.createdAt} 
+        **User Joined At:** ${member.guild.joinedAt}
+        They are the ${member.guild.memberCount}th Member
+        `)
+        .setFooter(member.user.tag)
+        .setTimestamp()
+        logchannel.send({content: '_ _', embeds: [logembed]})
+    }
+})
+
 
 // Log when Ready
 client.once('ready', () => {
