@@ -12,11 +12,8 @@ module.exports = {
         .setDescription(`Kayne's Assistant is currently running on ${interaction.client.ws.ping} ms`)
         interaction.reply({
             content: '_ _', 
+            embeds: [embed],
             ephemeral: true
-        })
-        const msg = await channel.send({content: '_ _', embeds: [embed]})
-        if(${interaction.client.ws.ping} < 500 {
-
         })
     }
 };
